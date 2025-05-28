@@ -5,11 +5,13 @@ Este é um aplicativo React completo para gerenciamento de pagamentos de estudan
 ## Funcionalidades
 
 - **Dashboard Interativo**: Interface intuitiva para gerenciamento de pagamentos
-- **Seleção de Estudante**: Dropdown para escolher o estudante
+- **Gerenciamento de Estudantes**: Adicionar e remover estudantes
 - **Seleção de Período**: Dropdowns para escolher mês e ano
 - **Registro de Pagamentos**: Campo para inserir valores de pagamento
+- **Edição de Pagamentos**: Opção para editar ou excluir pagamentos registrados
 - **Exibição de Informações**: Visualização do plano de estudo, valor total, valor pago e valor restante
 - **Histórico de Pagamentos**: Tabela com todos os pagamentos registrados para o estudante e período selecionados
+- **Persistência de Dados**: Dados salvos localmente no navegador
 
 ## Estrutura de Dados
 
@@ -22,11 +24,11 @@ Este é um aplicativo React completo para gerenciamento de pagamentos de estudan
 1. Clone o repositório
 2. Instale as dependências:
    ```
-   pnpm install
+   npm install
    ```
 3. Execute o servidor de desenvolvimento:
    ```
-   pnpm run dev
+   npm run dev
    ```
 4. Acesse o aplicativo em `http://localhost:5173`
 
@@ -37,12 +39,13 @@ Este é um aplicativo React completo para gerenciamento de pagamentos de estudan
 - Tailwind CSS
 - shadcn/ui (componentes de UI)
 - Vite (bundler)
+- localStorage (persistência de dados)
 
 ## Estrutura do Projeto
 
-- `/src/components`: Componentes React (Dashboard, PaymentTable)
+- `/src/components`: Componentes React (Dashboard, PaymentTable, StudentForm)
 - `/src/context`: Contexto global para gerenciamento de estado
-- `/src/data`: Dados de exemplo e funções utilitárias
+- `/src/hooks`: Hooks personalizados
 - `/src/types`: Definições de tipos TypeScript
 - `/src/App.tsx`: Componente principal da aplicação
 
@@ -50,7 +53,7 @@ Este é um aplicativo React completo para gerenciamento de pagamentos de estudan
 
 Você pode facilmente customizar este aplicativo:
 
-- Adicione novos estudantes e planos de estudo em `/src/data/sampleData.ts`
+- Adicione novos planos de estudo no componente de adição de planos
 - Modifique a interface visual nos componentes em `/src/components`
 - Estenda as funcionalidades adicionando novos componentes e recursos
 

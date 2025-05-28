@@ -1,86 +1,18 @@
 import { Student, StudyPlan, Payment } from '../types';
 
 // Dados de exemplo para planos de estudo
-export const studyPlans: StudyPlan[] = [
-  {
-    id: 'plan1',
-    name: 'Plano Básico',
-    value: 250.00,
-  },
-  {
-    id: 'plan2',
-    name: 'Plano Intermediário',
-    value: 320.00,
-  },
-  {
-    id: 'plan3',
-    name: 'Plano Avançado',
-    value: 450.00,
-  },
-  {
-    id: 'plan4',
-    name: 'Plano Premium',
-    value: 1000.00,
-  },
-];
+export const studyPlans: StudyPlan[] = [];
 
 // Dados de exemplo para estudantes
-export const students: Student[] = [
-  {
-    id: 'student1',
-    name: 'Mariana',
-    studyPlanId: 'plan2',
-  }
-];
-
-// Função para gerar data atual formatada
-const formatDate = (date: Date): string => {
-  return date.toISOString().split('T')[0];
-};
+export const students: Student[] = [];
 
 // Dados de exemplo para pagamentos
-export const payments: Payment[] = [
-  {
-    id: 'payment1',
-    studentId: 'student1',
-    date: formatDate(new Date(2025, 4, 10)), // 10 de maio de 2025
-    month: 5,
-    year: 2025,
-    amount: 300.00,
-  },
-  {
-    id: 'payment2',
-    studentId: 'student1',
-    date: formatDate(new Date(2025, 4, 20)), // 20 de maio de 2025
-    month: 5,
-    year: 2025,
-    amount: 200.00,
-  },
-  {
-    id: 'payment3',
-    studentId: 'student2',
-    date: formatDate(new Date(2025, 4, 15)), // 15 de maio de 2025
-    month: 5,
-    year: 2025,
-    amount: 500.00,
-  },
-  {
-    id: 'payment4',
-    studentId: 'student3',
-    date: formatDate(new Date(2025, 4, 5)), // 5 de maio de 2025
-    month: 5,
-    year: 2025,
-    amount: 600.00,
-  },
-  {
-    id: 'payment5',
-    studentId: 'student4',
-    date: formatDate(new Date(2025, 3, 10)), // 10 de abril de 2025
-    month: 4,
-    year: 2025,
-    amount: 1000.00,
-  },
-];
+export const payments: Payment[] = [];
+
+// Função para gerar data atual formatada
+export const formatDate = (date: Date): string => {
+  return date.toISOString().split('T')[0];
+};
 
 // Função para gerar um novo ID único
 export const generateId = (prefix: string): string => {
@@ -120,4 +52,50 @@ export const addPayment = (payment: Omit<Payment, 'id'>): Payment => {
   
   payments.push(newPayment);
   return newPayment;
+};
+
+// Função para adicionar um novo plano de estudo
+export const addStudyPlan = (plan: Omit<StudyPlan, 'id'>): StudyPlan => {
+  const newPlan: StudyPlan = {
+    ...plan,
+    id: generateId('plan'),
+  };
+  
+  studyPlans.push(newPlan);
+  return newPlan;
+};
+
+// Função para adicionar um novo estudante
+export const addStudent = (student: Omit<Student, 'id'>): Student => {
+  const newStudent: Student = {
+    ...student,
+    id: generateId('student'),
+  };
+  
+  students.push(newStudent);
+  return newStudent;
+};
+
+// Função para remover um estudante
+export const removeStudent = (studentId: string): void => {
+  const index = students.findIndex(s => s.id === studentId);
+  if (index !== -1) {
+    students.splice(index, 1);
+    
+    // Remover todos os pagamentos associados ao estudante
+    const paymentIndices = payments
+      .map((p, i) => p.studentId === studentId ? i : -1)
+      .filter(i => i !== -1)
+      .sort((a, b) => b - a); // Ordenar em ordem decrescente para remover de trás para frente
+    
+    paymentIndices.forEach(i => payments.splice(i, 1));
+  }
+};
+
+// Função para remover um pagamento
+export const removePayment = (paymentId: string): void => {
+  const index = payments.findIndex(p => p.id === paymentId);
+  if (index !== -1) {
+    payments.splice(index, 1);
+  }
 };

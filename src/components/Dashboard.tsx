@@ -17,7 +17,20 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { usePayment } from "../context/PaymentContext";
-//import { Student, MonthYear } from "../types";
+import { Student, MonthYear } from "../types";
+import StudentForm from "./StudentForm";
+import { Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 
 const monthNames = [
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -41,6 +54,7 @@ const Dashboard = () => {
     setSelectedMonthYear,
     setPaymentAmount,
     addPayment,
+    removeStudent,
     getStudentPlan
   } = usePayment();
 
@@ -73,11 +87,21 @@ const Dashboard = () => {
     addPayment();
   };
 
+  const handleDeleteStudent = () => {
+    if (selectedStudent) {
+      removeStudent(selectedStudent.id);
+    }
+  };
+
   const studentPlan = selectedStudent ? getStudentPlan(selectedStudent.id) : undefined;
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">Sistema de Gerenciamento de Pagamentos</h1>
+      
+      <div className="mb-6">
+        <StudentForm />
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Formulário de Pagamento */}
@@ -91,7 +115,34 @@ const Dashboard = () => {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="student">Estudante</Label>
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="student">Estudante</Label>
+                  {selectedStudent && (
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="destructive" size="sm">
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Excluir
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Esta ação não pode ser desfeita. Isso excluirá permanentemente o estudante
+                            {selectedStudent?.name} e todos os seus pagamentos registrados.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                          <AlertDialogAction onClick={handleDeleteStudent}>
+                            Excluir
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  )}
+                </div>
                 <Select 
                   onValueChange={handleStudentChange} 
                   value={selectedStudent?.id || ""}
