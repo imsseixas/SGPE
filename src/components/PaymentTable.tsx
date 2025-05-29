@@ -39,6 +39,16 @@ const monthNames = [
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
+type Payment = {
+  id: string;
+  amount: number;
+  date: string;
+  studentId: string;
+  month: number;
+  year: number;
+};
+
+
 const PaymentTable = () => {
   const { 
     selectedStudent, 
@@ -47,17 +57,17 @@ const PaymentTable = () => {
     students,
     removePayment,
     payments,
-    setPaymentsData = (payments) => {} // Adicionando uma função vazia como fallback
+    setPaymentsData = () => {} // Adicionando uma função vazia como fallback
   } = usePayment();
 
-  const [editingPayment, setEditingPayment] = useState(null);
+  const [editingPayment, setEditingPayment] = useState<Payment | null>(null);
   const [editAmount, setEditAmount] = useState("");
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   const filteredPayments = getFilteredPayments();
 
   // Formatar valor para exibição em reais
-  const formatCurrency = (value) => {
+  const formatCurrency = (value:string) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
@@ -65,16 +75,16 @@ const PaymentTable = () => {
   };
 
   // Encontrar nome do estudante pelo ID
-  const getStudentName = (studentId) => {
+  const getStudentName = (studentId:string) => {
     const student = students.find(s => s.id === studentId);
     return student ? student.name : 'Desconhecido';
   };
 
-  const handleDeletePayment = (paymentId) => {
+  const handleDeletePayment = (paymentId:string) => {
     removePayment(paymentId);
   };
 
-  const openEditDialog = (payment) => {
+  const openEditDialog = (payment:string) => {
     setEditingPayment(payment);
     setEditAmount(payment.amount.toString());
     setIsEditDialogOpen(true);

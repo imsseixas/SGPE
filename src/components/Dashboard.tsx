@@ -17,7 +17,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { usePayment } from "../context/PaymentContext";
-import { Student, MonthYear } from "../types";
+//import { Student, MonthYear } from "../types";
 import StudentForm from "./StudentForm";
 import { Trash2 } from "lucide-react";
 import {
