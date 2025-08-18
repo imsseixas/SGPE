@@ -1,0 +1,54 @@
+site de agendamento de salas de uma instituição de ensino. O design deve ser moderno e elegante, utilizando uma paleta de cores baseada em verde claro.
+
+O site será dividido em seções e funcionalidades específicas:
+
+Interface Pública (Tela de Exibição)
+Uma tela que exibirá o calendário diário de agendamentos para todas as salas.
+
+A interface será automática, atualizando à meia-noite para exibir o dia seguinte.
+
+Essa tela terá atualização em tempo real, mostrando novos agendamentos ou cancelamentos instantaneamente.
+
+A tela será exibida em monitores no corredor, para consulta rápida.
+
+Sistema de Autenticação
+O acesso às funcionalidades de agendamento será restrito a usuários logados.
+
+Ao tentar agendar, o usuário será redirecionado para uma tela de login.
+
+O login será feito com credenciais institucionais.
+
+Funcionalidades de Agendamento (Usuário Logado)
+Visualização de Salas: O usuário verá uma lista de todas as salas disponíveis.
+
+Filtros de Recursos: Será possível filtrar as salas por recursos específicos (ex: projetor, quadro branco), que devem ser cadastrados pelo administrador.
+
+Agendamento Simples: O usuário poderá selecionar uma sala e visualizar um calendário semanal/mensal para escolher um horário disponível.
+
+Agendamento Recorrente: O usuário poderá agendar a mesma sala e horário para eventos repetitivos, como aulas semanais, especificando a frequência e a data de término.
+
+Notificações Inteligentes: O sistema enviará lembretes (por e-mail ou notificação no site) antes dos agendamentos, e alertas de cancelamento ou edição.
+
+Integração com Calendários: Cada agendamento terá um botão para exportar o evento para calendários externos como Google Calendar ou Outlook (.ics).
+
+Integração Física: Cada sala terá um QR Code que, ao ser escaneado, direciona o usuário para a página de agendamento daquela sala específica.
+
+Lógica de Conflito: Caso dois usuários tentem agendar o mesmo horário, o sistema deve dar prioridade ao primeiro a salvar e notificar o segundo sobre o conflito.
+
+Painel do Usuário
+Uma área onde o usuário pode visualizar, editar e cancelar seus próprios agendamentos.
+
+Será exibido um histórico de agendamentos já realizados.
+
+Painel do Administrador
+Um painel completo para gerenciar o sistema.
+
+Gestão de Salas: Adicionar, editar ou remover salas e seus recursos.
+
+Gestão de Usuários: Definir diferentes perfis de usuário com níveis de permissão (ex: professores, administradores, etc.).
+
+Sistema de Aprovação: Ativar a necessidade de aprovação manual do administrador para agendamentos específicos (ex: uso do auditório).
+
+Sistema de Avisos: Publicar comunicados gerais para todos os usuários no painel principal.
+
+Relatórios e Análises: O painel deve incluir gráficos e dados sobre as salas mais utilizadas, taxa de ocupação e histórico de agendamentos.
